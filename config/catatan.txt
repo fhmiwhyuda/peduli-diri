@@ -1,0 +1,3 @@
+1234|M.Fahmi wahyuda|12-03-2022|15:10|Pulo|36 Celcius
+1234|M.Fahmi wahyuda|11-03-2022|07:10|Pasirian|36 Celcius
+1234|M.Fahmi wahyuda|10-03-2022|07:00|Pasirian|35 Celcius
