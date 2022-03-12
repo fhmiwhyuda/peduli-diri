@@ -1,15 +1,16 @@
-<?php 
-    session_start();
-    if (empty($_SESSION['nik'])) {?>
-        <script type="text/javascript">
-            alert("Silahkan login terlebih dahulu!");
-            window.location.assign("index.php");
-        </script>
-        <?php
-    }
+<?php
+session_start();
+if (empty($_SESSION['nik'])) { ?>
+    <script type="text/javascript">
+        alert("Silahkan login terlebih dahulu!");
+        window.location.assign("index.php");
+    </script>
+<?php
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -21,7 +22,11 @@
     <link rel="stylesheet" href="assets/plugins/fontawesome-free/css/all.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="assets/dist/css/adminlte.min.css">
+    <!-- Datatables -->
+    <link rel="stylesheet" href="assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
 </head>
+
 <body class="hold-transition sidebar-mini">
     <!-- Site wrapper -->
     <div class="wrapper">
@@ -29,9 +34,9 @@
         <nav class="main-header navbar navbar-expand navbar-white navbar-light">
             <!-- Left navbar links -->
             <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
-            </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+                </li>
             </ul>
         </nav>
         <!-- /.navbar -->
@@ -65,13 +70,13 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="?page=tulis_catatan" class="nav-link">
                                 <i class="nav-icon fas fa-pencil-alt"></i>
                                 <p>Tulis catatan</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="?page=riwayat_perjalanan" class="nav-link">
                                 <i class="nav-icon fas fa-clone"></i>
                                 <p>Riwayat perjalanan</p>
                             </a>
@@ -106,6 +111,21 @@
             <!-- Main content -->
             <section class="content">
                 <!-- isi content dinamis -->
+                <?php
+                if (!empty(@$_GET['page'])) {
+                    switch (@$_GET['page']) {
+                        case 'tulis_catatan':
+                            include 'tulis_catatan.php';
+                            break;
+                        case 'riwayat_perjalanan':
+                            include 'riwayat_perjalanan.php';
+                            break;
+                        default:
+                            echo "<h3>Halaman tidak ditemukan!</h3>";
+                            break;
+                    }
+                }
+                ?>
             </section>
             <!-- /.content -->
         </div>
@@ -125,7 +145,18 @@
     <script src="assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- AdminLTE App -->
     <script src="assets/dist/js/adminlte.min.js"></script>
-    <!-- AdminLTE for demo purposes -->
-    <script src="assets/dist/js/demo.js"></script>
+    <script src="assets/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script>
+        $(function() {
+            $("#example1").DataTable({
+                "responsive": true,
+                "lengthChange": false,
+                "autoWidth": false,
+                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+        });
+    </script>
 </body>
+
 </html>
