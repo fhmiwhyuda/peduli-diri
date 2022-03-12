@@ -7,10 +7,10 @@
     foreach ($data as $value) {
         $pisah = explode("|", $value);
         if ($nik==$pisah['0']) {
-            $cek = TRUE;
+            @$cek = TRUE;
         }
     }
-    if ($cek) { ?> <!-- NIK sudah terdaftar -->
+    if (@$cek) { ?> <!-- NIK sudah terdaftar -->
         <script type="text/javascript">
             alert("NIK sudah terdaftar!");
             window.location.assign("../register.php");
